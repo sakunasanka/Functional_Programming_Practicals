@@ -1,4 +1,4 @@
-object question03{
+object question04{
     def main(args: Array[String]): Unit={
         println(s"Ticket Price     Profit")
         println(s"5                ${profit(5)}")
