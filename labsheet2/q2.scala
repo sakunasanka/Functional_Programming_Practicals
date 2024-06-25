@@ -21,6 +21,7 @@ object q2{
       //  println(s" -2 * (g - k) + c = ${-2 * (g - k) + c}")
 
         println(s" c++ = $c")
+        c += 1
 
         c += 1
         println(s" ++c * a++ = ${c * a}")
