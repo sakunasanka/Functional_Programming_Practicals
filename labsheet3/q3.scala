@@ -11,5 +11,5 @@ object q3 extends App{
     }
 
     val res = mean(num1, num2);
-    println(s"Mean of $num1 & $num2 is $res")
+    printf("Mean of %d & %d is %.2f\n", num1, num2, res)
 }
