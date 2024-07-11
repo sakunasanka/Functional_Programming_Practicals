@@ -1,4 +1,4 @@
-object question_4_02{
+object IsPositive{
     def isEven(number: Int):String = number match{
         case x if (x%2 == 0) => "Even Number"
         case _ => "Odd Number"
