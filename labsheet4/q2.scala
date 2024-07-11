@@ -7,7 +7,7 @@ object IsPositive{
     def isPositive(number: Int):String = number match{
         case 0 => "Equals to Zero"
         case x if (x > 0) => "Greater than Zero"
-        case _ => "Less tha Zero"
+        case _ => "Less than Zero"
     }
 
     def main(args: Array[String]):Unit={
