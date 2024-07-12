@@ -1,5 +1,5 @@
 object InventoryManagementSystem {
-  var itemNames: Array[String] = Array("Apple", "Banana", "Orange")
+  var itemNames: Array[String] = Array("Pencil", "Pen", "Erasor")
   var itemQuantities: Array[Int] = Array(10, 5, 7)
 
   def displayInventory(): Unit = {
@@ -33,8 +33,8 @@ object InventoryManagementSystem {
 
   def main(args: Array[String]): Unit = {
     displayInventory()
-    restockItem("Banana", 10)
-    sellItem("Apple", 3)
+    restockItem("Pen", 10)
+    sellItem("Pencil", 3)
     displayInventory()
   }
 }
