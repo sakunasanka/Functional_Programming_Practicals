@@ -1,4 +1,4 @@
-object LibraryManager {
+object q2 {
 
     case class Book(title: String, author: String, isbn: String)
     var books: Set[Book] = Set()
