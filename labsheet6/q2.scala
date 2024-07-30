@@ -32,7 +32,7 @@ object q2 {
 
   // Function to validate input
   def validateInput(name: String, marks: Int, totalMarks: Int): (Boolean, Option[String]) = {
-    if (name.trim.isEmpty) {
+    if (name.isEmpty) {
       (false, Some("Name cannot be empty"))
     } else if (marks < 0 || totalMarks < 0) {
       (false, Some("Marks and total possible marks must be positive integers"))
