@@ -2,11 +2,6 @@ import scala.io.StdIn.{readLine, readInt}
 
 object q2 {
 
-  def main(args: Array[String]): Unit = {
-    val studentInfo = getStudentInfoWithRetry()
-    printStudentRecord(studentInfo)
-  }
-
   // Function to read and validate student info
   def getStudentInfoWithRetry(): (String, Int, Int, Double, Char) = {
     var isValid = false
@@ -68,4 +63,10 @@ object q2 {
     println(f"Percentage: ${record._4}%.2f%%")
     println(s"Grade: ${record._5}")
   }
+
+    def main(args: Array[String]): Unit = {
+        val studentInfo = getStudentInfoWithRetry()
+        printStudentRecord(studentInfo)
+    }
+
 }
