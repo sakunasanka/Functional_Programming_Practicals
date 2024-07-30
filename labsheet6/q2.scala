@@ -1,86 +1,71 @@
+import scala.io.StdIn.{readLine, readInt}
+
 object q2 {
-  def getStudentInfo(): (String, Int, String) = {
-    var name: String = getStudentInfoWithRetry(0).toString
-    var marks: Int = getStudentInfoWithRetry(1).asInstanceOf[Int]
-    var state: Boolean = false
-    while (!state) {
-      val (name0, marks0, state0) = validateInput(name, marks)
-      name = name0
-      marks = marks0
-      state = state0
-    }
-    val grade = setGrade(marks)
-    (name, marks, grade)
-  }
-
-  def getStudentInfoWithRetry(what: Int): Any = {
-    if (what == 0) {
-      val name: String = scala.io.StdIn.readLine("Enter the Name: ")
-      name
-    } else {
-      print(s"Enter the Marks: ")
-      val marks: Int = scala.io.StdIn.readInt()
-      marks
-    }
-  }
-
-  def validateInput(name: String, marks: Int): (String, Int, Boolean) = {
-    if (name.isBlank) {
-      if (checkMarks(marks) == -1) {
-        (
-          getStudentInfoWithRetry(0).toString,
-          getStudentInfoWithRetry(1).asInstanceOf[Int],
-          false
-        )
-      } else {
-        (getStudentInfoWithRetry(0).toString, marks, false)
-      }
-    } else {
-      if (checkMarks(marks) == -1) {
-        (name, getStudentInfoWithRetry(1).asInstanceOf[Int], false)
-      } else {
-        (name, marks, true)
-      }
-    }
-  }
-
-  def validateInput_(name: String , marks: Int): ( Boolean, Option[String]) = {
-    if (name.isBlank) {
-      return (false, Some("Name cannot be empty."))
-    }
-    if (marks >= 0 && marks <= 100) {
-      return (false, Some("Marks must be between 0 and the total possible marks."))
-    }
-    (true, None)
-  }
-
-  def checkMarks(marks: Int): Int = {
-    if (marks >= 0 && marks <= 100) {
-      marks
-    } else {
-      -1
-    }
-  }
-
-  def setGrade(marks: Int): String = marks match {
-    case x if x < 50 => "D"
-    case x if x < 75 => "C"
-    case x if x < 90 => "B"
-    case _           => "A"
-  }
-
-  def printStudentRecord(student: (String, Int, String)): Unit = {
-    if (!student._1.isBlank) {
-      println(
-        s"\nName: ${student._1}\tMarks: ${student._2}\tGrade: ${student._3}\n"
-      )
-    } else {
-      println("Invalid Student Record")
-    }
-  }
 
   def main(args: Array[String]): Unit = {
-    val student1 = getStudentInfo()
-    printStudentRecord(student1)
+    val studentInfo = getStudentInfoWithRetry()
+    printStudentRecord(studentInfo)
+  }
+
+  // Function to read and validate student info
+  def getStudentInfoWithRetry(): (String, Int, Int, Double, Char) = {
+    var isValid = false
+    var studentInfo: (String, Int, Int, Double, Char) = ("", 0, 0, 0.0, 'F')
+
+    while (!isValid) {
+      printf("Enter student name: ")
+      val name = readLine()
+
+      printf("Enter marks obtained: ")
+      val marks = readInt()
+
+      printf("Enter total possible marks: ")
+      val totalMarks = readInt()
+
+      val validationResult = validateInput(name, marks, totalMarks)
+      isValid = validationResult._1
+
+      if (isValid) {
+        studentInfo = getStudentInfo(name, marks, totalMarks)
+      } else {
+        println(s"Invalid input: ${validationResult._2.getOrElse("Unknown error")}")
+      }
+    }
+
+    studentInfo
+  }
+
+  // Function to validate input
+  def validateInput(name: String, marks: Int, totalMarks: Int): (Boolean, Option[String]) = {
+    if (name.trim.isEmpty) {
+      (false, Some("Name cannot be empty"))
+    } else if (marks < 0 || totalMarks < 0) {
+      (false, Some("Marks and total possible marks must be positive integers"))
+    } else if (marks > totalMarks) {
+      (false, Some("Marks obtained cannot exceed total possible marks"))
+    } else {
+      (true, None)
+    }
+  }
+
+  // Function to get student info and calculate percentage and grade
+  def getStudentInfo(name: String, marks: Int, totalMarks: Int): (String, Int, Int, Double, Char) = {
+    val percentage = (marks.toDouble / totalMarks) * 100
+    val grade = percentage match {
+      case p if p >= 90 => 'A'
+      case p if p >= 75 => 'B'
+      case p if p >= 50 => 'C'
+      case _ => 'D'
+    }
+    (name, marks, totalMarks, percentage, grade)
+  }
+
+  // Function to print student record
+  def printStudentRecord(record: (String, Int, Int, Double, Char)): Unit = {
+    println(s"Student Name: ${record._1}")
+    println(s"Marks Obtained: ${record._2}")
+    println(s"Total Possible Marks: ${record._3}")
+    println(f"Percentage: ${record._4}%.2f%%")
+    println(s"Grade: ${record._5}")
   }
 }
