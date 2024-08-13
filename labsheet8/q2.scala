@@ -1,18 +1,19 @@
-object q1{
-    
-    def encrypt(text: String , shifter: Int): String = {
-        text.map(c => (c + shifter).toChar)
-    }
+object q2{
+    def main(args: Array[String]): Unit = {
+        val multifyOf3: Int => Boolean = (x: Int) => x % 3 == 0
+        val multifyOf5: Int => Boolean = (x: Int) => x % 5 == 0
 
-    def decrypt(text: String , shifter: Int): String = {
-        text.map(c => (c - shifter).toChar)
-    }
+        print("Enter a Number: ")
+        val number = scala.io.StdIn.readInt()
 
-    def main(args: Array[String]): Unit={
-        val text = "Hello Scala"
-        println(s"Original Text : ${text}")
-        val encrypted_text = encrypt(text , 1) 
-        println(s"Encrypted Text : ${encrypted_text}")
-        println(s"Decrypted Text : ${decrypt(encrypted_text , 1)}")
+        val result = (multifyOf3(number) , multifyOf5(number)) match{
+            case (true , true) => "Multiple of Both Three and Five"
+            case (true , false) => "Multiple of Three"
+            case (false , true) => "Multiple of Five"
+            case (false , false) => "Not a Multiple of Three of Five"
+        }
+
+        println(result)
+        
     }
 }
