@@ -8,11 +8,20 @@ object q1{
         text.map(c => (c - shifter).toChar)
     }
 
-    def main(args: Array[String]): Unit={
-        val text = "Hello Scala"
-        println(s"Original Text : ${text}")
-        val encrypted_text = encrypt(text , 1) 
-        println(s"Encrypted Text : ${encrypted_text}")
-        println(s"Decrypted Text : ${decrypt(encrypted_text , 1)}")
+    def cipher(text: String, shift: Int, algo: (String, Int) => String): String = {
+        algo(text, shift)
+    }
+
+    def main(args: Array[String]): Unit = {
+        val originaltext = "Hello, Sakuna!"
+        val shift = 1
+
+        // Encrypt the originaltext
+        val encryptedText = cipher(originaltext, shift, encrypt)
+        println(s"Encrypted Text: $encryptedText")
+
+        // Decrypt the ciphertext
+        val decryptedText = cipher(encryptedText, shift, decrypt)
+        println(s"Decrypted Text: $decryptedText")
     }
 }
