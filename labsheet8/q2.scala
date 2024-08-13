@@ -10,7 +10,7 @@ object q2{
             case (true , true) => "Multiple of Both Three and Five"
             case (true , false) => "Multiple of Three"
             case (false , true) => "Multiple of Five"
-            case (false , false) => "Not a Multiple of Three of Five"
+            case (false , false) => "Not a Multiple of Three or Five"
         }
 
         println(result)
