@@ -1,4 +1,4 @@
-class Account(private var balance: Double) {
+class Account_1(private var balance: Double) {
 
   def deposit(amount: Double): Unit = {
     require(amount > 0, "Deposit amount must be positive")
@@ -14,7 +14,7 @@ class Account(private var balance: Double) {
     }
   }
 
-  def transfer(amount: Double, toAccount: Account): Unit = {
+  def transfer(amount: Double, toAccount: Account_1): Unit = {
     require(amount > 0, "Transfer amount must be positive")
     if (amount <= balance) {
       this.withdraw(amount) 
@@ -37,9 +37,9 @@ class Account(private var balance: Double) {
   override def toString: String = f"Account balance: $$${balance}%.2f"
 }
 
-class Bank(val accounts: List[Account]) {
+class Bank(val accounts: List[Account_1]) {
 
-  def accountsWithNegativeBalances: List[Account] = accounts.filter(_.getBalance < 0)
+  def accountsWithNegativeBalances: List[Account_1] = accounts.filter(_.getBalance < 0)
 
   def totalBalance: Double = accounts.map(_.getBalance).sum
 
@@ -49,10 +49,10 @@ class Bank(val accounts: List[Account]) {
 }
 
 object Main extends App {
-  val account1 = new Account(1000.00)
-  val account2 = new Account(-200.00)
-  val account3 = new Account(500.00)
-  val account4 = new Account(-50.00)
+  val account1 = new Account_1(1000.00)
+  val account2 = new Account_1(-200.00)
+  val account3 = new Account_1(500.00)
+  val account4 = new Account_1(-50.00)
 
   val bank = new Bank(List(account1, account2, account3, account4))
 
